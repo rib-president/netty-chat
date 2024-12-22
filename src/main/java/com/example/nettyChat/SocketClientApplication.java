@@ -15,7 +15,7 @@ public class SocketClientApplication {
 
   public static void main(String[] args) {
     WebSocketClient client = new ReactorNettyWebSocketClient();
-    URI uri = URI.create("ws://192.168.100.4:8888/chat");
+    URI uri = URI.create("ws://localhost:8888/chat");
 
     client.execute(uri, session ->
             session.send(Mono.just(session.textMessage("Client connected")))

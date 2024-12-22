@@ -9,15 +9,21 @@ import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.web.reactive.config.EnableWebFlux;
 
 @SpringBootApplication
 @EnableWebFlux
 public class SocketServiceApplication {
   public static void main(String[] args) {
-    SpringApplication.run(SocketServiceApplication.class, args);
+    ConfigurableApplicationContext context = SpringApplication.run(SocketServiceApplication.class, args);
+
+    // 애플리케이션이 종료되지 않도록 대기
+    context.registerShutdownHook();
   }
 }
+
+
 //
 //class NettyServer {
 //  public void start() {

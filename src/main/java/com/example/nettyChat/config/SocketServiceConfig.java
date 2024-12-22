@@ -8,6 +8,7 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import reactor.core.publisher.Mono;
@@ -45,6 +46,11 @@ public class SocketServiceConfig {
         workerGroup.shutdownGracefully();
       }
     }).subscribeOn(Schedulers.boundedElastic()).then();
+  }
+
+  @Bean
+  public CommandLineRunner runner(Mono<Void> startNettyServer) {
+    return args -> startNettyServer.subscribe();
   }
 }
 
